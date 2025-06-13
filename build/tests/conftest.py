@@ -4,7 +4,7 @@ from pytest import fixture
 
 @fixture(scope="session")
 def dataset() -> pd.DataFrame:
-    return pd.read_csv('../../../test_dataset.csv')
+    return pd.read_csv('../../raw_data/test_dataset.csv')
 
 @fixture(scope="session")
 def required_columns() -> tuple[str, ...]:

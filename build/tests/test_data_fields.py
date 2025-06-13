@@ -3,7 +3,7 @@ import pandas as pd
 
 from pydantic import ValidationError
 
-from test_integrity.build.models import (
+from build.data_models.models import (
     CustomerIDField,
     NameField,
     AgeField,
