@@ -6,3 +6,17 @@ from pytest import fixture
 def dataset() -> pd.DataFrame:
     return pd.read_csv('../../../test_dataset.csv')
 
+@fixture(scope="session")
+def required_columns() -> tuple[str, ...]:
+    return (
+    "CustomerID",
+    "Name",
+    "Email",
+    "Age",
+    "Company",
+    "Country",
+    "Product",
+    "PurchaseDate",
+    "PurchaseQuantity",
+    "PurchaseAmount"
+)

@@ -1,3 +1,4 @@
+"""Tests for valid data type entries in each column."""
 import pytest
 import pandas as pd
 
