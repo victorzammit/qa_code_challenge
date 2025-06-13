@@ -41,6 +41,9 @@ class CountryField(BaseModel):
     @field_validator('Country')
     @staticmethod
     def must_be_valid_country(value: str) -> str:
+        """Validates country against default list in pycountry."""
+        # FIXME: ideally here, original source creation of data is using an enumerated list of accepted countries.
+        #  This would allow the direct use of enum values, and bypass the fuzzy find implemented here.
         country_name_list = [country.name for country in pycountry.countries]
         match, score = process.extractOne(value.strip(), country_name_list)
         if score < 80:
@@ -49,6 +52,8 @@ class CountryField(BaseModel):
 
 class ProductField(BaseModel):
     """Pydantic model for Product field."""
+    # FIXME: Product type should be an enumeration of available products to purchase.
+    #  This would allow checking entries more rigorously.
     Product: str
 
 
