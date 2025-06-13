@@ -1,6 +1,11 @@
 """Pydantic models for field data validation/"""
-from pydantic import BaseModel, UUID4, EmailStr, conint, field_validator
+from typing import Annotated
 from datetime import datetime
+
+import pycountry
+
+from thefuzz import process
+from pydantic import BaseModel, UUID4, EmailStr, field_validator, Field
 
 
 class CustomerIDField(BaseModel):
@@ -21,7 +26,7 @@ class EmailField(BaseModel):
 class AgeField(BaseModel):
     """Pydantic model for age field."""
     # enforcing age range (minimum age 18, maximum 120)
-    Age: conint(ge=18, le=120)
+    Age: Annotated[int, Field(strict=True, gt=0, le=130)]
 
 
 class CompanyField(BaseModel):
@@ -33,6 +38,14 @@ class CountryField(BaseModel):
     """Pydantic model for Country field."""
     Country: str
 
+    @field_validator('Country')
+    @staticmethod
+    def must_be_valid_country(value: str) -> str:
+        country_name_list = [country.name for country in pycountry.countries]
+        match, score = process.extractOne(value.strip(), country_name_list)
+        if score < 80:
+            raise ValueError(f"'{value}' is not a valid country. Closest match: {match}")
+        return value
 
 class ProductField(BaseModel):
     """Pydantic model for Product field."""
@@ -54,11 +67,11 @@ class PurchaseDateField(BaseModel):
 
 class PurchaseQtyField(BaseModel):
     """Pydantic model for Purchase Quantity field."""
-    purchase_qty: float
+    purchase_qty: Annotated[float, Field(strict=True, gt=0)]
 
 class PurchaseAmountField(BaseModel):
     """Pydantic model for Purchase Amount field."""
-    purchase_amount: float
+    purchase_amount: Annotated[float, Field(strict=True, gt=0)]
 
 class CustomerPurchaseRecord(
     CustomerIDField,
