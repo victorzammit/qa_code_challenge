@@ -1,22 +1,24 @@
 [project]
-name = "qa-challenge"
+name = "qa-code-challenge"
 version = "0.1.0"
-description = "Project including QA interview tasks from Betsson"
+description = "QA task for Betsson Interview"
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Victor Zammit",email = "victorzammit@icloud.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pydantic (>=2.11.6,<3.0.0)",
-    "pandas (>=2.3.0,<3.0.0)",
     "pytest (>=8.4.0,<9.0.0)",
-    "email-validator (>=2.2.0,<3.0.0)",
     "pycountry (>=24.6.1,<25.0.0)",
-    "thefuzz (>=0.22.1,<0.23.0)"
+    "thefuzz (>=0.22.1,<0.23.0)",
+    "pandas (>=2.3.0,<3.0.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
