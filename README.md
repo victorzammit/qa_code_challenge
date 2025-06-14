@@ -2,11 +2,11 @@
 ## Introduction
 This project contains all the code to check the consistency of the provided dataset.
 Tests are categorized into two:
-- Table integrity tests:
+- **Table integrity tests**:
   - Test checking that all required columns are present
   - Test checking that no unexpected columns are present
   - Test checking that there are no duplicate rows.
-- Data field type tests:
+- **Data field type tests**:
   - Data type testing
   - For PurchaseDate, checks that date is in the past-present
   - For Age, checks that age is greater than 18 (assumed legal age), to a maximum cutoff
@@ -17,7 +17,6 @@ Tests are categorized into two:
 - [poetry](https://python-poetry.org/docs/#installing-with-the-official-installer)
 
 ## How to install poetry
-
 ```shell
 curl -sSL https://install.python-poetry.org | python3.13
 ```
