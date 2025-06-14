@@ -1,10 +1,12 @@
+import os
 import pandas as pd
 from pytest import fixture
 
 
 @fixture(scope="session")
 def dataset() -> pd.DataFrame:
-    return pd.read_csv('../../raw_data/test_dataset.csv')
+    path = os.path.join(os.path.dirname(__file__), "..", "..", "raw_data", "test_dataset.csv")
+    return pd.read_csv(path)
 
 @fixture(scope="session")
 def required_columns() -> tuple[str, ...]:
