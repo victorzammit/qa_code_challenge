@@ -1,3 +1,4 @@
+"""conftest.py"""
 import os
 import pandas as pd
 from pytest import fixture
