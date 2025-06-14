@@ -17,6 +17,13 @@ class NameField(BaseModel):
     """Pydantic model for Name field."""
     Name: str
 
+    @field_validator("Name")
+    @staticmethod
+    def must_be_not_empty(value) -> str:
+        """Validates that the string is not empty."""
+        if len(value.strip()) == 0:
+            raise ValueError("Name cannot be empty or only whitespace.")
+        return value
 
 class EmailField(BaseModel):
     """Pydantic model for Email field."""
@@ -25,8 +32,8 @@ class EmailField(BaseModel):
 
 class AgeField(BaseModel):
     """Pydantic model for age field."""
-    # enforcing age range (minimum age 18, maximum 120)
-    Age: Annotated[int, Field(strict=True, gt=0, le=130)]
+    # enforcing age range (minimum age 18, maximum 130)
+    Age: Annotated[int, Field(strict=True, gt=18, lt=130)]
 
 
 class CompanyField(BaseModel):
@@ -62,8 +69,8 @@ class PurchaseDateField(BaseModel):
     PurchaseDate: datetime
 
     @field_validator("PurchaseDate")
-    @classmethod
-    def date_must_be_in_past_or_present(cls, value:datetime):
+    @staticmethod
+    def date_must_be_in_past_or_present(value:datetime):
         """checks that purchase dates are not future dates."""
         if value > datetime.now():
             raise ValueError('Purchases cannot be in the future')
