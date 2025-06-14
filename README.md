@@ -1,7 +1,10 @@
 # Betsson Code Challenge
 ## Introduction
 This project contains all the code to check the consistency of the provided dataset.
-Tests are categorized into two:
+Tests are categorized into three:
+- Data Model Unit Tests:
+  - Tests checking invalid entries into models, checking for appropriate behaviour.
+  - Tests checking valid entries into models, checking for accepted entry.
 - **Table integrity tests**:
   - Test checking that all required columns are present
   - Test checking that no unexpected columns are present
