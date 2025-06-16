@@ -1,10 +1,14 @@
-import pytest
-import sys
+import subprocess
 
 if __name__ == "__main__":
-    status = pytest.main(["./build/tests"])
-    if status != 0:
-        print(f"Tests failed with exit code {status} ❌")
-    else:
+    print("Running tests...")
+    with open("test_failures.log", "w") as logfile:
+        result = subprocess.run(
+            ["pytest", "./build/tests"],
+            stdout=logfile,
+            stderr=logfile
+        )
+    if result.returncode == 0:
         print("Tests passed ✅")
-    sys.exit(status)
+    else:
+        print("Tests failed ❌ — see test_failures.log")
